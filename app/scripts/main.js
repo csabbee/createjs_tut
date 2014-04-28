@@ -22,6 +22,7 @@ function handleComplete(event){
     ball.y = 200;
     
     createjs.Tween.get(ball, {loop: true}).to({x: 450}, 3000).to({x: 50}, 3000);
+    createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener('tick', tick);
     
     stage.addChild(ball);
@@ -29,6 +30,7 @@ function handleComplete(event){
 }
 
 function handleClick(event){
+    console.log(event.target);
     var bmp = new createjs.Bitmap(queue.getResult('daisy'));
     bmp.x = Math.random()*500;
     bmp.y = Math.random()*500;
