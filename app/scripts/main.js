@@ -11,7 +11,25 @@ function init(){
     queue.addEventListener('complete', handleComplete);
     queue.loadManifest([{id: 'daisy', src:'images/camera.png'}, {id:'sound', src:'sounds/camera-shutter-click-01.wav'}]);
     
+    var bg = new createjs.Shape();
+    bg.graphics.beginFill('#CCC').drawRoundRect(0,0,100,30,8);
+    var label = new createjs.Text('heyo', 'bold 12px Arial');
+    label.set({textAlign:'center', x:50, textBaseline:'middle',y:15});
+    var button = stage.addChild(new createjs.Container());
+    button.x = button.y = 100;
+    button.addChild(bg, label);
+    label.alpha = 0;
     
+    var btn = createjs.Tween.get(button).to({alpha:1},1000);
+    var lbl = createjs.Tween.get(label).to({alpha: 1},1000);
+            lbl.to({text: 'spin'});
+            btn.to({rotation: 360}, 1300);
+            lbl.to({text:'bounce'},1300);
+            btn.to({y:380}, 2000, createjs.Ease.bounceOut);
+            
+    button.on('click', function(){
+        console.log('hello!');
+    });
 }
 
 function handleComplete(event){
